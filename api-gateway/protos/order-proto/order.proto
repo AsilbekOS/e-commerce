@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option go_package = "protos/order-proto";
+
+service OrderService {
+    rpc CreateOrder (OrderRequest) returns (OrderResponse);
+    rpc CreateOrders (stream OrderRequest) returns (MessageOrderResponse);
+    rpc GetOrder (GetOrderRequset) returns (OrderResponse);
+}
+
+message OrderRequest {
+    int32 product_id = 1;
+    int32 quantity = 2;
+}
+
+message OrderResponse {
+    string id = 1;
+    string product_name = 2;
+    int32 quantity = 3;
+    double price = 4;
+    double total_amount = 5;
+    string created_at = 6;
+}
+
+message GetOrderRequset {
+    int32 id = 1;
+}
+
+message MessageOrderResponse {
+    string message = 1;
+}
